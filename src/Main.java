@@ -40,11 +40,30 @@ public class Main {
 
 //        yield() tells the scheduler: "I am ready to pause. You can give chance to another thread."
 
-        LifeCycle t1 = new LifeCycle();
-        LifeCycle t2 = new LifeCycle();
+//        LifeCycle t1 = new LifeCycle();
+//        LifeCycle t2 = new LifeCycle();
+//
+//        t1.start();
+//        t2.start();
 
-        t1.start();
-        t2.start();
+
+
+/* synchronized */
+
+            Counter counter=new Counter(); // resource
+            MyThread t1=new MyThread(counter);//share resource
+            MyThread t2=new MyThread(counter);//share resource
+            t1.start();
+            t2.start();
+
+            try{
+                t1.join();
+                t2.join();
+            }catch (Exception e){
+                System.out.println(e);
+            }
+
+             System.out.println(counter.getCount());
 
 
 
